@@ -1,4 +1,9 @@
-Java Wrapper for Yo! Payments
+Yo Payments Java Utility
+=========================================
+Use this utility to integrate Yo Payments APIs in your Java Code. Follow the procedure below to test this code with your Yo Payments credentials.
+To create generate RSA keys, follow chapter 4.2 of the main API documentation.
+
+Java Utility for Yo! Payments
 =========================================
 1. Clone this source code.
 2. Put your keys under ./target/keys. Then, make sure you set your key variables to the right path. 
