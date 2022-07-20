@@ -37,7 +37,7 @@ public class YoPayments {
     String apiUsername;
     String apiPassword;
     String production_url = "https://paymentsapi1.yo.co.ug/ybs/task.php";
-    String sandbox_url = "http://sandbox.yo.co.ug/services/yopaymentsdev/task.php";
+    String sandbox_url = "https://sandbox.yo.co.ug/services/yopaymentsdev/task.php";
     String mode = "TEST";//SET TO TEST or PRODUCTION
     String url = "";
     String pemPrivateKeyFilePath = "";
