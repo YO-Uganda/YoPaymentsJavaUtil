@@ -14,6 +14,8 @@ Java Utility for Yo! Payments
 7. Test other aspects like Bulk payments, Bulk Payments Check status and other parts as per the examples commented in there.
 
 After Successful compilation, run and you should see similar output as below:
+Trace
+========================================
 Status: OK
 StatusCode: 0
 StatusMessage: 
