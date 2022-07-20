@@ -13,7 +13,10 @@ Java Utility for Yo! Payments
 6. To test secondary verification, in main method, uncomment //secondaryVerification(); The Secondary verification uses a different public key.
 7. Test other aspects like Bulk payments, Bulk Payments Check status and other parts as per the examples commented in there.
 
+Compile and Run
+=======================
 After Successful compilation, run and you should see similar output as below:
+
 Trace
 ========================================
 Status: OK
