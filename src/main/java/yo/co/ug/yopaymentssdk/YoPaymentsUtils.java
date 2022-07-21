@@ -121,12 +121,9 @@ public class YoPaymentsUtils {
     */
         public static PrivateKey getPrivateKeyFromFile(String filePath) throws IOException, URISyntaxException, NoSuchAlgorithmException, InvalidKeySpecException {
             String privateKeyContent = readAllBytesFromFile(filePath);
-            System.out.println("privateKeyContent: "+privateKeyContent);
             privateKeyContent = privateKeyContent.replaceAll("\\r\\n", "")
                     .replace("-----BEGIN PRIVATE KEY-----", "")
                     .replace("-----END PRIVATE KEY-----", "");
-
-            System.out.println("privateKeyContent: "+privateKeyContent);
 
 
             KeyFactory kf = KeyFactory.getInstance("RSA");
