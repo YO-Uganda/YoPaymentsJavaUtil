@@ -1,7 +1,7 @@
 Yo Payments Java Utility
 =========================================
 Use this utility to integrate Yo Payments APIs in your Java Code. Follow the procedure below to test this code with your own Yo Payments credentials.
-To create generate RSA keys, follow the guide in chapter 4.2 of the main API documentation.
+To generate RSA keys, follow the guide in chapter 4.2 of the main API documentation.
 
 Java Utility for Yo! Payments
 =========================================
