@@ -42,7 +42,7 @@ public class YoPaymentsSample {
         //testWithdawRequest();
 
         //Uncomment the following to Test Deposit Request
-        testDepositRequest();
+        //testDepositRequest();
 
         //Uncomment the following line to test Bulk Payments
         //testBulkPayments();
@@ -56,6 +56,24 @@ public class YoPaymentsSample {
         
         /*Uncomment the line below to test secondary verification*/
         //secondaryVerification();
+
+        /*Uncomment the line below to test check balance API*/
+        //testBalance();
+
+        /*Uncomment the line below to test get ministatent*/
+        //testMinistament();
+
+        /*Uncomment the line below to test send mobile Airtime*/
+        //testsendAirtimeMobile();
+
+        /*Uncomment the line below to test pause bulk payment*/
+        //testPauseBulkPayment();
+
+        /*Uncomment the line below to test resume bulk payment*/
+        //testResumeBulkPayment();
+
+        /*Uncomment the line below to test cancel bulk payment*/
+        testCancelBulkPayment();
     }
     
     static void testWithdawRequest() throws IOException {
@@ -384,5 +402,194 @@ public class YoPaymentsSample {
             return;
         }
     }
+
+    //Test Balance
+    static void testBalance() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        YoPayments.YoPaymentsResponse r=yp.getBalance();
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("StatusMessage: "+r.statusMessage);
+            System.out.println("ErrorMessage: "+r.errorMessage);
+            //System.out.println("Balances: ");
+            for(Balance bal: r.balances){
+                System.out.println("Balance\n=================\n\n");
+                System.out.println("Currency Code: "+ bal.getCode());
+                System.out.println("Balance: " + bal.getBalance());
+                System.out.print("\n");
+            }
+        }
+        //Request Trace
+        System.out.println(yp.requestAndResponse);
+    }
+
+    //Test get_ministatement
+    static void testMinistament() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        String startDate="";
+        String endDate="";
+        String transactionStatus="SUCCEEDED";
+        String currencyCode="";
+        String resultSetLimit="";
+        String transactionEntryDesignation="";
+        String externalReference="";
+        YoPayments.YoPaymentsResponse r=yp.getMiniStatement(
+            startDate,
+            endDate,
+            transactionStatus,
+            currencyCode,
+            resultSetLimit, 
+            transactionEntryDesignation,
+            externalReference
+
+        );
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("TotalTransactions: "+r.totalTransactions);
+            System.out.println("ReturnedTransactions: "+r.returnedTransactions);
+            for(Transaction t: r.transactions){
+                System.out.println("Transaction\n=================\n\n");
+                System.out.println("TransactionSystemId: "+ t.getTransactionSystemId());
+                System.out.println("TransactionReference: " + t.getTransactionReference());
+                System.out.println("TransactionStatus: " + t.getTransactionStatus());
+                System.out.println("InitiationDate: " + t.getInitiationDate());
+                System.out.println("CompletionDate: " + t.getCompletionDate());
+                System.out.println("NarrativeBase64: " + t.getNarrativeBase64());
+                System.out.println("Currency: " + t.getCurrency());
+                System.out.println("Amount: " + t.getAmount());
+                System.out.println("Balance: " + t.getBalance());
+                System.out.println("GeneralType: " + t.getGeneralType());
+                System.out.println("DetailedType: " + t.getDetailedType());
+                System.out.println("BeneficiaryMsisdn: " + t.getBeneficiaryMsisdn());
+                System.out.println("BeneficiaryBase64: " + t.getBeneficiaryBase64());
+                System.out.println("SenderMsisdn: " + t.getSenderMsisdn());
+                System.out.println("SenderBase64: " + t.getSenderBase64());
+                System.out.println("Base64TransactionExternalReference: " + t.getBase64TransactionExternalReference());
+                System.out.println("TransactionEntryDesignation: " + t.getTransactionEntryDesignation());
+                System.out.print("\n");
+            }
+        }
+        //Request Trace
+        //System.out.println(yp.requestAndResponse);
+    }
+
+    //Test SendAirtime
+    static void testsendAirtimeMobile() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        String account="256772003456";
+        String amount="2000";
+        String narrative="Airtime";
+        String externalReference="RT45";
+        YoPayments.YoPaymentsResponse r=yp.sendAirtimeMobile(
+            account,
+            amount,
+            narrative,
+            externalReference
+
+        );
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("StatusMessage: "+r.statusMessage);
+            System.out.println("ErrorMessage: "+r.errorMessage);
+            System.out.println("TransactionStatus: "+r.transactionStatus);
+            System.out.println("TransactionReference: "+r.transactionReference);
+            System.out.println("NetworkReferenceId: "+r.mnoTransactionReferenceId);
+        }
+        //Request Trace
+        System.out.println(yp.requestAndResponse);
+    }
+    //Test pauseBulkPaymente
+    static void testPauseBulkPayment() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        String bulkPaymentRequestIdentifier="2023010311BULKPAY3542";
+        String pauseReason="Trial";
+        YoPayments.YoPaymentsResponse r=yp.pauseBulkPayment(
+            bulkPaymentRequestIdentifier,
+            pauseReason
+        );
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("StatusMessage: "+r.statusMessage);
+            System.out.println("ErrorMessage: "+r.errorMessage);
+        }
+        //Request Trace
+        System.out.println(yp.requestAndResponse);
+    }
+
+    //Test pauseBulkPaymente
+    static void testResumeBulkPayment() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        String bulkPaymentRequestIdentifier="2023010311BULKPAY3542";
+        YoPayments.YoPaymentsResponse r=yp.resumeBulkPayment(
+            bulkPaymentRequestIdentifier
+        );
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("StatusMessage: "+r.statusMessage);
+            System.out.println("ErrorMessage: "+r.errorMessage);
+        }
+        //Request Trace
+        System.out.println(yp.requestAndResponse);
+    }
+
+    //Test pauseBulkPaymente
+    static void testCancelBulkPayment() throws IOException{
+        YoPayments yp = new YoPayments(
+            "90003066053",
+            "do9t-IqUe-FxJW-IgUI-NV1E-fDee-YhOQ-iikQ",
+            "TEST",
+            true
+        );
+        String bulkPaymentRequestIdentifier="2023010311BULKPAY3542";
+        YoPayments.YoPaymentsResponse r=yp.cancelBulkPayment(
+            bulkPaymentRequestIdentifier
+        );
+        //Display the response 
+        if (r != null) {
+            System.out.println("Status: "+r.status);
+            System.out.println("StatusCode: "+r.statusCode);
+            System.out.println("StatusMessage: "+r.statusMessage);
+            System.out.println("ErrorMessage: "+r.errorMessage);
+        }
+        //Request Trace
+        System.out.println(yp.requestAndResponse);
+    }
+
+
     
 }
